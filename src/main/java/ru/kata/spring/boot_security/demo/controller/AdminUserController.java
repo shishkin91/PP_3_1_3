@@ -39,14 +39,9 @@ public class AdminUserController {
     }
 
     @PostMapping("/admin/create")
-    public String addUser(@RequestParam("idRoles") List<Long> idRoles,
+    public String addUser(@RequestParam("idRoles") List<Long> rolesId,
                           User user) {
-        Set<Role> roleList = new HashSet<>();
-        for (Long id : idRoles) {
-            roleList.add(roleService.findRoleById(id));
-        }
-        user.setRoles(roleList);
-        userService.addUser(user);
+        userService.addUser(user, rolesId);
         return "redirect:/admin";
     }
 
@@ -58,7 +53,7 @@ public class AdminUserController {
             listRoles.add(roleService.findRoleById(idRole));
         }
         user.setRoles(listRoles);
-        userService.updateUser(user);
+        userService.updateUser(user, rolesId);
         return "redirect:/admin";
     }
 
