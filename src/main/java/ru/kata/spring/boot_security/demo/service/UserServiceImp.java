@@ -32,17 +32,9 @@ public class UserServiceImp implements UserService {
         return userRepository.findAll();
     }
 
-    @Override
-    public void addUser(User user, List<Long> rolesId) {
-        createOrUpdate(user, rolesId);
-    }
 
     @Override
-    public void updateUser(User user, List<Long> rolesId) {
-        createOrUpdate(user, rolesId);
-    }
-
-    private void createOrUpdate(User user, List<Long> rolesId) {
+    public void createOrUpdate(User user, List<Long> rolesId) {
         Set<Role> roleList = new HashSet<>();
         for (Long id : rolesId) {
             roleList.add(roleService.findRoleById(id));

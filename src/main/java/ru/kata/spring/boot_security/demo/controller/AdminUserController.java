@@ -41,7 +41,7 @@ public class AdminUserController {
     @PostMapping("/admin/create")
     public String addUser(@RequestParam("idRoles") List<Long> rolesId,
                           User user) {
-        userService.addUser(user, rolesId);
+        userService.createOrUpdate(user, rolesId);
         return "redirect:/admin";
     }
 
@@ -49,7 +49,7 @@ public class AdminUserController {
     public String updateUser(@ModelAttribute("user") User user,
                              @RequestParam("idRoles") List<Long> rolesId) {
 
-        userService.updateUser(user, rolesId);
+        userService.createOrUpdate(user, rolesId);
         return "redirect:/admin";
     }
 
